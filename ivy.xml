@@ -1,11 +1,16 @@
 <ivy-module version="2.0">
-    <info organisation="prom" module="NewPackageIvy" revision="latest">
+    <info organisation="prom" module="ProM-Contexts" revision="latest">
     	<description>
     		Version VERSION
     	</description>
     </info>
     <dependencies>
-       <dependency org="prom" name="Log" rev="latest" changing="true" transitive="true" />
-       <dependency org="prom" name="BasicUtils" rev="latest" changing="true" transitive="true" />
+       <dependency org="prom-libs" name="bsh" rev="2.0b4" changing="false" transitive="false" />
+       <dependency org="prom-libs" name="guava" rev="16.0.1" changing="false" transitive="true" />
+       <dependency org="prom-libs" name="jgraph" rev="5.13.0.4" changing="false" transitive="false" />
+       <dependency org="junit" name="junit" rev="4.8.1" changing="false" transitive="false" />
+       <dependency org="prom" name="ProM-Framework" rev="latest" changing="true" transitive="true" />
+       <dependency org="prom-libs" name="Uitopia" rev="0.5" changing="false" transitive="false" />
+       <dependency org="prom-libs" name="UITopiaResources" rev="0.5" changing="false" transitive="false" />
     </dependencies>
 </ivy-module>
