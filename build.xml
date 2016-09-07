@@ -167,7 +167,6 @@
 			<fileset dir="ivy">
 				<include name="bsh-2.0b4.jar" />
 				<include name="guava-16.0.1.jar" />
-				<include name="jgraph-5.13.0.4.jar" />
 				<include name="junit-4.8.1.jar" />
 				<include name="Uitopia-0.5.jar" />
 				<include name="UITopiaResources-0.5.jar" />
