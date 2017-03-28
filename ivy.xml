@@ -10,9 +10,12 @@
 	</configurations>  
     <dependencies defaultconf="default">
        <dependency org="prom" name="ProM-Framework" rev="latest" changing="true" transitive="true" />
-       <dependency conf="lib->default" org="junit" name="junit" rev="4.8.1" changing="false" transitive="false" />
-       <dependency conf="lib->default" org="prom-libs" name="bsh" rev="2.0b4" changing="false" transitive="false" />
-       <dependency conf="lib->default" org="prom-libs" name="guava" rev="16.0.1" changing="false" transitive="true" />
+       <!--dependency conf="lib->default" org="junit" name="junit" rev="4.8.1" changing="false" transitive="false" /-->
+       <dependency conf="lib->default" org="junit" name="junit" rev="4.12" changing="false" transitive="false" />
+       <!--dependency conf="lib->default" org="prom-libs" name="bsh" rev="2.0b4" changing="false" transitive="false" /-->
+       <dependency conf="lib->default" org="bsh" name="bsh" rev="2.0b4" changing="false" transitive="false" />
+       <!--dependency conf="lib->default" org="prom-libs" name="guava" rev="16.0.1" changing="false" transitive="true" /-->
+       <dependency conf="lib->default" org="com.google.guava" name="guava" rev="21.0" changing="false" transitive="true" />
        <dependency conf="lib->default" org="prom-libs" name="Spex" rev="1.1" changing="false" transitive="false" />
        <dependency conf="lib->default" org="prom-libs" name="Uitopia" rev="0.5-20160527" changing="false" transitive="false" />
        <dependency conf="lib->default" org="prom-libs" name="UITopiaResources" rev="0.5" changing="false" transitive="false" />
