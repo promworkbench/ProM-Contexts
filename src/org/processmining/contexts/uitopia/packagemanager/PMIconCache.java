@@ -18,33 +18,45 @@ public class PMIconCache {
 
 	public static ImageIcon getIcon(PMPackage pack) throws MalformedURLException {
 		synchronized (iconMap) {
+			/*
+			 * Check whether icon already in cache
+			 */
 			ImageIcon icon = iconMap.get(pack.getDescriptor().getLogoURL());
-			if (icon == null) {
-				URL logoURL;
-				logoURL = new URL(pack.getDescriptor().getLogoURL());
-				icon = new ImageIcon(logoURL);
-				iconMap.put(pack.getDescriptor().getLogoURL(), icon);
-//				System.out.println("[PMIconCache] Added cached icon for URL " + pack.getDescriptor().getLogoURL());
-			} else {
-//				System.out.println("[PMIconCache] Found cached icon for URL " + pack.getDescriptor().getLogoURL());
+			if (icon != null) {
+				/*
+				 * Yes, it is. Return cached icon.
+				 */
+				return icon;
 			}
+			/*
+			 * No, it is not. Retrieve icon and put in cache.
+			 */
+			URL logoURL = new URL(pack.getDescriptor().getLogoURL());
+			icon = new ImageIcon(logoURL);
+			iconMap.put(pack.getDescriptor().getLogoURL(), icon);
 			return icon;
 		}
 	}
 
 	public static ImageIcon getIconPreview(PMPackage pack) {
 		synchronized (iconPreviewMap) {
+			/*
+			 * Check whether icon preview already in cache
+			 */
 			ImageIcon icon = iconPreviewMap.get(pack.getDescriptor().getLogoURL());
-			Image image = null;
-			if (icon == null) {
-				image = pack.getPreview(150, 150);
+			if (icon != null) {
+				/*
+				 * Yes, it is. Return cached icon preview.
+				 */
+				return icon;
 			}
+			/*
+			 * No, it is not. Get icon preview and put in cache.
+			 */
+			Image image = pack.getPreview(150, 150);
 			if (image != null) {
 				icon = new ImageIcon(image);
 				iconPreviewMap.put(pack.getDescriptor().getLogoURL(), icon);
-//				System.out.println("[PMIconCache] Added cached icon preview for URL " + pack.getDescriptor().getLogoURL());
-			} else {
-//				System.out.println("[PMIconCache] Found cached icon preview for URL " + pack.getDescriptor().getLogoURL());
 			}
 			return icon;
 		}
