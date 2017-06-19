@@ -2,9 +2,6 @@ package org.processmining.contexts.uitopia.packagemanager;
 
 import java.awt.Image;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
@@ -67,24 +64,9 @@ public class PMPackage {
 		isFavorite = f;
 	}
 
-	/*
-	 * Cache the retrieved icons. Prevents unnecessary access over the network.
-	 */
-	private static Map<String, ImageIcon> iconMap = new HashMap<String, ImageIcon>();
-	
 	public Image getPreview(int w, int h) {
 		try {
-			ImageIcon icon;
-			synchronized(iconMap) {
-				icon = iconMap.get(descriptor.getLogoURL());
-				if (icon == null) {
-					URL logoURL = new URL(descriptor.getLogoURL());
-					icon = new ImageIcon(logoURL);
-					iconMap.put(descriptor.getLogoURL(), icon);
-//				} else {
-//					System.out.println("[PMPackage] Found cached icon for URL " + descriptor.getLogoURL());
-				}
-			}
+			ImageIcon icon = PMIconCache.getIcon(this);
 			Image img = icon.getImage();
 			int width = icon.getIconWidth();
 			int height = icon.getIconHeight();

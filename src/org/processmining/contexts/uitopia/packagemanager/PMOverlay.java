@@ -104,6 +104,7 @@ public class PMOverlay extends TwoButtonOverlayDialog implements PackageManager.
 	public void setPackage(PackageDescriptor pack) {
 		label.setText(pack.toHTML());
 		try {
+			System.out.println("[PMPackage] Retrieve icon for URL " + pack.getLogoURL());
 			URL logoURL = new URL(pack.getLogoURL());
 			ImageIcon icon = new ImageIcon(logoURL);
 			Image img = icon.getImage();

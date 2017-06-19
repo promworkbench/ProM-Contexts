@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
@@ -66,11 +65,13 @@ public class PMPackageView extends RoundedPanel {
 			infoPanel.setMaximumSize(new Dimension(500, 180));
 			infoPanel.setOpaque(false);
 			infoPanel.setLayout(new BorderLayout());
-			Image icon = pack.getPreview(150, 150);
+//			Image icon = pack.getPreview(150, 150);
 			JLabel preview = null;
+//			if (icon != null) {
+			ImageIcon icon = PMIconCache.getIconPreview(pack);
 			if (icon != null) {
-				preview = new JLabel(new ImageIcon(icon));
-				preview.setSize(150, 150);
+				preview = new JLabel(icon);
+//				preview.setSize(150, 150);
 				preview.setOpaque(false);
 			}
 			JPanel detailsPanel = new JPanel();
