@@ -619,6 +619,10 @@ public class ProMResourceManager extends UpdateSignaller implements ResourceMana
 	private String extractFileType(String filename) {
 		int indexName = filename.lastIndexOf(File.separatorChar);
 		int indexDot = filename.indexOf('.', indexName);
+		if (indexDot < 0) {
+			// No dot in filename, hence no extension.
+			return "";
+		}
 		return filename.substring(indexDot);
 	}
 
