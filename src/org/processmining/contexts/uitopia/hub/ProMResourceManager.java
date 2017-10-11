@@ -617,7 +617,10 @@ public class ProMResourceManager extends UpdateSignaller implements ResourceMana
 	}
 
 	private String extractFileType(String filename) {
-		int indexName = filename.lastIndexOf(File.separatorChar);
+		/*
+		 * HV: Restrict the length of the extension to 9 characters.
+		 */
+		int indexName = Math.max(filename.lastIndexOf(File.separatorChar), filename.length() - 10);
 		int indexDot = filename.indexOf('.', indexName);
 		if (indexDot < 0) {
 			// No dot in filename, hence no extension.
