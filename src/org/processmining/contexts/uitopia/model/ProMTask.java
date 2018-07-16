@@ -275,6 +275,8 @@ public class ProMTask implements Task<ProMPOResource>, ProgressEventListener, Lo
 
 	public void pluginTerminatedWithError(PluginContext pluginContext, Throwable t) {
 		// Gracefully ignore. Only the completed is of interest
+		listener.completed();
+		active = false;
 		result = null;
 		changeProgress(upbo);
 	}
