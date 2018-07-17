@@ -1,10 +1,6 @@
 package org.processmining.contexts.uitopia.packagemanager;
 
-import java.awt.Image;
-import java.net.MalformedURLException;
 import java.util.Set;
-
-import javax.swing.ImageIcon;
 
 import org.processmining.framework.packages.PackageDescriptor;
 
@@ -64,21 +60,21 @@ public class PMPackage {
 		isFavorite = f;
 	}
 
-	public Image getPreview(int w, int h) {
-		try {
-			ImageIcon icon = PMIconCache.getIcon(this);
-			Image img = icon.getImage();
-			int width = icon.getIconWidth();
-			int height = icon.getIconHeight();
-			float xScale = w / (float) width;
-			float yScale = h / (float) height;
-			float scale = (xScale < yScale ? xScale : yScale);
-			return img.getScaledInstance((int) (width * scale), (int) (height * scale), Image.SCALE_SMOOTH);
-		} catch (MalformedURLException e) {
-		}
-		return null;
-	}
-
+//	public Image getPreview(int w, int h) {
+//		try {
+//			ImageIcon icon = PMIconCache.getIcon(this);
+//			Image img = icon.getImage();
+//			int width = icon.getIconWidth();
+//			int height = icon.getIconHeight();
+//			float xScale = w / (float) width;
+//			float yScale = h / (float) height;
+//			float scale = (xScale < yScale ? xScale : yScale);
+//			return img.getScaledInstance((int) (width * scale), (int) (height * scale), Image.SCALE_SMOOTH);
+//		} catch (MalformedURLException e) {
+//		}
+//		return null;
+//	}
+//
 	public boolean equals(Object o) {
 		if (o instanceof PMPackage) {
 			return ((PMPackage) o).descriptor.equals(descriptor);

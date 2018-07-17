@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -73,23 +71,23 @@ public class PMOverlay extends TwoButtonOverlayDialog implements PackageManager.
 		southPanel.setOpaque(false);
 		southPanel.setBorder(BorderFactory.createEmptyBorder());
 
-//		JCheckBox check = new JCheckBox(
-//				"Automatically install new versions of packages (requires an internet connection (xx))");
-//		check.setOpaque(false);
-//		check.setSelected(PackageManager.getInstance().doAutoUpdate());
-//		check.addItemListener(new ItemListener() {
-//
-//			public void itemStateChanged(ItemEvent e) {
-//				if (e.getStateChange() == ItemEvent.DESELECTED) {
-//					PackageManager.getInstance().setAutoUpdate(false);
-//				} else if (e.getStateChange() == ItemEvent.SELECTED) {
-//					PackageManager.getInstance().setAutoUpdate(true);
-//				}
-//			}
-//		});
+		//		JCheckBox check = new JCheckBox(
+		//				"Automatically install new versions of packages (requires an internet connection (xx))");
+		//		check.setOpaque(false);
+		//		check.setSelected(PackageManager.getInstance().doAutoUpdate());
+		//		check.addItemListener(new ItemListener() {
+		//
+		//			public void itemStateChanged(ItemEvent e) {
+		//				if (e.getStateChange() == ItemEvent.DESELECTED) {
+		//					PackageManager.getInstance().setAutoUpdate(false);
+		//				} else if (e.getStateChange() == ItemEvent.SELECTED) {
+		//					PackageManager.getInstance().setAutoUpdate(true);
+		//				}
+		//			}
+		//		});
 
 		southPanel.add(scrollpane, BorderLayout.CENTER);
-//		southPanel.add(check, BorderLayout.SOUTH);
+		//		southPanel.add(check, BorderLayout.SOUTH);
 
 		mainPanel.add(label, BorderLayout.CENTER);
 		mainPanel.add(southPanel, BorderLayout.SOUTH);
@@ -103,14 +101,12 @@ public class PMOverlay extends TwoButtonOverlayDialog implements PackageManager.
 
 	public void setPackage(PackageDescriptor pack) {
 		label.setText(pack.toHTML());
-		try {
-			System.out.println("[PMPackage] Retrieve icon for URL " + pack.getLogoURL());
-			URL logoURL = new URL(pack.getLogoURL());
-			ImageIcon icon = new ImageIcon(logoURL);
+		ImageIcon icon = PMIconCache.getIcon(pack);
+		if (icon != null) {
 			Image img = icon.getImage();
 			int m = icon.getIconHeight() > icon.getIconWidth() ? 200 : -200;
 			iconLabel.setIcon(new ImageIcon(img.getScaledInstance(-m, m, Image.SCALE_SMOOTH)));
-		} catch (MalformedURLException e) {
+		} else {
 			iconLabel.setIcon(null);
 			return;
 		}
@@ -133,7 +129,7 @@ public class PMOverlay extends TwoButtonOverlayDialog implements PackageManager.
 			// HV: Do not auto-close on an error, as the error message will get lost.
 			// Wait for the user to close the overlay.
 			//close(true);
-			
+
 			// Indicate that an error has occurred.
 			addText("An error has occurred. Please select OK to continue.");
 			log.setForeground(new Color(90, 0, 0));
