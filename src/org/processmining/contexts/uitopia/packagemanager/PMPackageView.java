@@ -2,10 +2,17 @@ package org.processmining.contexts.uitopia.packagemanager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -32,7 +39,7 @@ public class PMPackageView extends RoundedPanel {
 	private final PMPackage pack;
 	private final PMController controller;
 
-//	private AbstractButton actionButton;
+	//	private AbstractButton actionButton;
 	private AbstractButton installButton;
 	private AbstractButton updateButton;
 	private AbstractButton removeButton;
@@ -65,13 +72,13 @@ public class PMPackageView extends RoundedPanel {
 			infoPanel.setMaximumSize(new Dimension(500, 180));
 			infoPanel.setOpaque(false);
 			infoPanel.setLayout(new BorderLayout());
-//			Image icon = pack.getPreview(150, 150);
+			//			Image icon = pack.getPreview(150, 150);
 			JLabel preview = null;
-//			if (icon != null) {
+			//			if (icon != null) {
 			ImageIcon icon = PMIconCache.getIconPreview(pack);
 			if (icon != null) {
 				preview = new JLabel(icon);
-//				preview.setSize(150, 150);
+				//				preview.setSize(150, 150);
 				preview.setOpaque(false);
 			}
 			JPanel detailsPanel = new JPanel();
@@ -83,6 +90,9 @@ public class PMPackageView extends RoundedPanel {
 			detailsPanel.add(styleLabel(pack.getAuthorName(), new Color(30, 30, 30), 14));
 			detailsPanel.add(Box.createVerticalStrut(12));
 			detailsPanel.add(styleLabel(pack.getVersion(), new Color(60, 60, 60), 12));
+			detailsPanel.add(Box.createVerticalStrut(5));
+			detailsPanel.add(styleLinkedLabel("<html><i>License: " + pack.getLicense() + "</i></html>",
+					getLink2License(pack.getLicense()), new Color(60, 60, 60), 12));
 			detailsPanel.add(Box.createVerticalStrut(5));
 			String text = "<html><i>";
 			if (pack.getDescription() == null) {
@@ -100,30 +110,30 @@ public class PMPackageView extends RoundedPanel {
 			this.add(infoPanel);
 			this.add(Box.createVerticalStrut(25));
 		}
-		
+
 		// assemble actions panel
 		RoundedPanel actionsPanel = new RoundedPanel(50, 0, 0);
 		actionsPanel.setBackground(new Color(80, 80, 80));
 		actionsPanel.setLayout(new BoxLayout(actionsPanel, BoxLayout.X_AXIS));
 		actionsPanel.setBorder(BorderFactory.createEmptyBorder());
-		installButton = new ImageLozengeButton(ImageLoader.load("action_30x30_black.png"), "Install",
-				new Color(140, 140, 140), new Color(140, 40, 40), 2);
+		installButton = new ImageLozengeButton(ImageLoader.load("action_30x30_black.png"), "Install", new Color(140,
+				140, 140), new Color(140, 40, 40), 2);
 		installButton.setToolTipText(PMTooltips.INSTALLBUTTON);
 		installButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				installPacks();
 			}
 		});
-		updateButton = new ImageLozengeButton(ImageLoader.load("action_30x30_black.png"), "Update ",
-				new Color(140, 140, 140), new Color(40, 140, 40), 2);
+		updateButton = new ImageLozengeButton(ImageLoader.load("action_30x30_black.png"), "Update ", new Color(140,
+				140, 140), new Color(40, 140, 40), 2);
 		updateButton.setToolTipText(PMTooltips.UPDATEBUTTON);
 		updateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updatePacks();
 			}
 		});
-		removeButton = new ImageLozengeButton(ImageLoader.load("remove_30x30_black.png"), "Remove ",
-				new Color(140, 140, 140), new Color(40, 140, 40), 2);
+		removeButton = new ImageLozengeButton(ImageLoader.load("remove_30x30_black.png"), "Remove ", new Color(140,
+				140, 140), new Color(40, 140, 40), 2);
 		removeButton.setToolTipText(PMTooltips.REMOVEBUTTON);
 		removeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -166,7 +176,7 @@ public class PMPackageView extends RoundedPanel {
 		if (!showInstall && !showUpdate && !showRemove) {
 			actionsPanel.add(Box.createHorizontalGlue());
 			actionsPanel.add(styleLabel("No actions available", new Color(160, 160, 160), 12));
-			width += 110;			
+			width += 110;
 		}
 		actionsPanel.setMinimumSize(new Dimension(width, 50));
 		actionsPanel.setMaximumSize(new Dimension(width, 50));
@@ -250,17 +260,17 @@ public class PMPackageView extends RoundedPanel {
 	 * 
 	 * @return
 	 */
-//	public boolean action() {
-//		if (pack.getStatus() == PMStatus.TOUNINSTALL) {
-//			controller.remove(pack, controller.getMainView().getWorkspaceView());
-//			return false;
-//		} else {
-//			// (pack.getStatus() == PMStatus.TOUPDATE)  ||
-//			// (pack.getStatus() == PMStatus.TOINSTALL)
-//			controller.update(pack, controller.getMainView().getWorkspaceView());
-//			return true;
-//		}
-//	}
+	//	public boolean action() {
+	//		if (pack.getStatus() == PMStatus.TOUNINSTALL) {
+	//			controller.remove(pack, controller.getMainView().getWorkspaceView());
+	//			return false;
+	//		} else {
+	//			// (pack.getStatus() == PMStatus.TOUPDATE)  ||
+	//			// (pack.getStatus() == PMStatus.TOINSTALL)
+	//			controller.update(pack, controller.getMainView().getWorkspaceView());
+	//			return true;
+	//		}
+	//	}
 
 	public boolean installPacks() {
 		boolean allDone = true;
@@ -278,7 +288,7 @@ public class PMPackageView extends RoundedPanel {
 		}
 		return false;
 	}
-	
+
 	public boolean updatePacks() {
 		boolean allDone = true;
 		Collection<PMPackage> pp = new HashSet<PMPackage>();
@@ -295,7 +305,7 @@ public class PMPackageView extends RoundedPanel {
 		}
 		return false;
 	}
-	
+
 	public boolean removePacks() {
 		boolean allDone = true;
 		Collection<PMPackage> pp = new HashSet<PMPackage>();
@@ -312,7 +322,7 @@ public class PMPackageView extends RoundedPanel {
 		}
 		return false;
 	}
-	
+
 	private void showParents() {
 		controller.getMainView().getWorkspaceView().showParentsOf(pack);
 	}
@@ -327,5 +337,79 @@ public class PMPackageView extends RoundedPanel {
 		label.setForeground(color);
 		label.setFont(label.getFont().deriveFont(size));
 		return label;
+	}
+
+	private JLabel styleLinkedLabel(String text, final String link, Color color, float size) {
+		JLabel label = styleLabel(text, color, size);
+		if (link != null) {
+			label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			label.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					if (e.getClickCount() > 0) {
+						if (Desktop.isDesktopSupported()) {
+							Desktop desktop = Desktop.getDesktop();
+							try {
+								URI uri = new URI(link);
+								desktop.browse(uri);
+							} catch (IOException ex) {
+								ex.printStackTrace();
+							} catch (URISyntaxException ex) {
+								ex.printStackTrace();
+							}
+						}
+					}
+				}
+			});
+		}
+		return label;
+	}
+
+	private String getLink2License(String license) {
+		if (license.equals("LGPL") || license.equals("L-GPL") || license.equals("Lesser GPL")) {
+			return "http://www.gnu.org/licenses/lgpl.html";
+		}
+		if (license.equals("Apache 2.0")) {
+			return "http://www.apache.org/licenses/LICENSE-2.0.html";
+		}
+		if (license.equals("Apache")) {
+			return "http://www.apache.org/licenses/LICENSE-1.0";
+		}
+		if (license.equals("Apache 1.1")) {
+			return "http://www.apache.org/licenses/LICENSE-1.1";
+		}
+		if (license.equals("BSD 3-Clause")) {
+			return "http://opensource.org/licenses/BSD-3-Clause";
+		}
+		if (license.equals("BSD")) {
+			return "https://opensource.org/licenses/BSD-2-Clause";
+		}
+		if (license.equals("CPL")) {
+			return "https://opensource.org/licenses/cpl1.0.php";
+		}
+		if (license.equals("Daikon-specific license")) {
+			return "http://plse.cs.washington.edu/daikon/download/doc/daikon.html#License";
+		}
+		if (license.equals("dev.java.net \"Other\" License")) {
+			return "https://tablelayout.dev.java.net/servlets/LicenseDetails?licenseID=18";
+		}
+		if (license.equals("EPL 1.0") || license.equals("EPL")) {
+			return "http://www.eclipse.org/legal/epl-v10.html";
+		}
+		if (license.equals("GPL")) {
+			return "http://www.gnu.org/licenses/gpl.html";
+		}
+		if (license.equals("GPL v2")) {
+			return "http://www.gnu.org/licenses/gpl-2.0.html";
+		}
+		if (license.equals("AGPL") || license.equals("A-GPL") || license.equals("Affero GPL")) {
+			return "https://www.gnu.org/licenses/agpl.html";
+		}
+		if (license.equals("MIT")) {
+			return "http://www.opensource.org/licenses/mit-license.php";
+		}
+		if (license.equals("Mozilla Public License v1.0")) {
+			return "https://www-archive.mozilla.org/MPL/MPL-1.0.html";
+		}
+		return null;
 	}
 }

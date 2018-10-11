@@ -52,6 +52,10 @@ public class PMPackage {
 		return "Version " + descriptor.getVersion();
 	}
 
+	public String getLicense() {
+		return descriptor.getLicense();
+	}
+	
 	public boolean isFavorite() {
 		return isFavorite;
 	}
