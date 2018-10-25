@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 import org.deckfour.uitopia.api.model.Action;
 import org.deckfour.uitopia.api.model.ActionStatus;
 import org.deckfour.uitopia.api.model.ActionType;
@@ -35,7 +37,7 @@ public class ProMAction implements Action, Comparable<ProMAction> {
 	private final Author author;
 	private final PluginManager pluginManager;
 	private final String pack;
-
+	
 	private String help;
 	private String[] keywords;
 	private String[] catergories;
@@ -62,7 +64,7 @@ public class ProMAction implements Action, Comparable<ProMAction> {
 
 		catergories = plugin.getCategories();
 		keywords = plugin.getKeywords();
-
+		
 		pack = plugin.getAnnotation(UITopiaVariant.class, methodIndex).pack();
 
 		author = new Author() {
@@ -263,5 +265,44 @@ public class ProMAction implements Action, Comparable<ProMAction> {
 			}
 		}
 		return false;
+	}
+	
+	public ImageIcon getIcon() {
+		/*
+		 * HV: For the time being, we simply use the icon of the package. 
+		 * Later on, we can introduce icons that are specific for a plug-ins.
+		 */
+		if (plugin.getIcon() != null) {
+			return plugin.getIcon();
+		}
+//		PackageDescriptor pack = plugin.getPackage();
+//		if (pack != null) {
+//			return PMIconCache.getIcon(pack);
+//		}
+		/*
+		 * No icon.
+		 */
+		return null;
+	}
+	
+	public URL getURL() {
+		/*
+		 * HV: For the time being, we simply use the URL of th epackage.
+		 * Later on, we can introduce URLs that are specific for plug-ins.
+		 */
+		if (plugin.getURL() != null) {
+			return plugin.getURL();
+		}
+//		PackageDescriptor pack = plugin.getPackage();
+//		if (pack != null) {
+//			try {
+//				return new URL(pack.getURL());
+//			} catch (MalformedURLException e) {
+//			}	
+//		}
+		/*
+		 * No URL.
+		 */
+		return null;
 	}
 }
