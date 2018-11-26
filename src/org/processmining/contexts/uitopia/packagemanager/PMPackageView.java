@@ -368,6 +368,9 @@ public class PMPackageView extends RoundedPanel {
 		if (license.equals("LGPL") || license.equals("L-GPL") || license.equals("Lesser GPL")) {
 			return "http://www.gnu.org/licenses/lgpl.html";
 		}
+		if (license.equals("ProM"))	{
+			return "http://www.promtools.org/doku.php?id=license";
+		}
 		if (license.equals("Apache 2.0")) {
 			return "http://www.apache.org/licenses/LICENSE-2.0.html";
 		}
