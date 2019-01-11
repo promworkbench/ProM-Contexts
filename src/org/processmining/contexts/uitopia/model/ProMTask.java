@@ -28,11 +28,11 @@ public class ProMTask implements Task<ProMPOResource>, ProgressEventListener, Lo
 	private PluginExecutionResult result;
 	private int lowbo = 0, upbo = 0, progress = 0;
 	private final TaskListener listener;
-	private final UIContext context;
+	private UIContext context;
 	private final java.util.List<Collection<ProMPOResource>> parameterValues;
 	private final java.util.List<ProvidedObjectID> providedObjectIds;
 	private boolean active;
-	private final UIPluginContext pluginContext;
+	private UIPluginContext pluginContext;
 
 	public ProMTask(UIContext context, ProMAction action, java.util.List<Collection<ProMPOResource>> parameterValues,
 			UIPluginContext pluginContext, TaskListener listener) {
@@ -99,6 +99,9 @@ public class ProMTask implements Task<ProMPOResource>, ProgressEventListener, Lo
 		}
 		progress = upbo;
 		listener.updateProgress(1.0);
+		// Release handles to used contexts.
+		context = null;
+		this.pluginContext = null;
 	}
 
 	public ProMAction getAction() {
@@ -208,6 +211,9 @@ public class ProMTask implements Task<ProMPOResource>, ProgressEventListener, Lo
 		active = false;
 		result = null;
 		changeProgress(upbo);
+		// Release handles to used contexts.
+		context = null;
+		this.pluginContext = null;
 	}
 
 	public void pluginCompleted(PluginContext pluginContext) {
@@ -247,6 +253,9 @@ public class ProMTask implements Task<ProMPOResource>, ProgressEventListener, Lo
 		active = false;
 		result = null;
 		changeProgress(upbo);
+		// Release handles to used contexts.
+		context = null;
+		this.pluginContext = null;
 	}
 
 	public void pluginCreated(PluginContext pluginContext) {
@@ -279,6 +288,9 @@ public class ProMTask implements Task<ProMPOResource>, ProgressEventListener, Lo
 		active = false;
 		result = null;
 		changeProgress(upbo);
+		// Release handles to used contexts.
+		context = null;
+		this.pluginContext = null;
 	}
 
 	public java.util.List<ProvidedObjectID> getProvidedObjectIds() {
