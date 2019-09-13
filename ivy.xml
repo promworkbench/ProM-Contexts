@@ -22,8 +22,8 @@
        <!-- No license -->
        <dependency conf="lib->default" org="prom-libs" name="bsh" rev="2.0b4" changing="false" transitive="false" />
        <dependency conf="lib->default" org="prom-libs" name="Spex" rev="1.1" changing="false" transitive="false" />
-       <dependency conf="lib->default" org="prom-libs" name="Uitopia" rev="0.6-20181030" changing="false" transitive="false" />
-       <dependency conf="lib->default" org="prom-libs" name="UITopiaResources" rev="0.5" changing="false" transitive="false" />
+       <dependency conf="lib->default" org="prom-libs" name="Uitopia" rev="0.6-20190913" changing="false" transitive="false" />
+       <dependency conf="lib->default" org="prom-libs" name="UITopiaResources" rev="0.6-20190913" changing="false" transitive="false" />
        
     </dependencies>
 </ivy-module>
