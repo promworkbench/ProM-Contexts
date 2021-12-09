@@ -84,7 +84,7 @@ public class ProMTask implements Task<ProMPOResource>, ProgressEventListener, Lo
 							result.<ProMFuture<?>>getResult(i).cancel(!action.handlesCancel());
 						}
 					}
-				} catch (NullPointerException _) {
+				} catch (NullPointerException e) {
 					// Happens when task terminates before we can cancel all children
 				}
 			}
