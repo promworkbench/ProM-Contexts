@@ -1,8 +1,5 @@
 package org.processmining.contexts.uitopia.packagemanager;
 
-import info.clearthought.layout.TableLayout;
-import info.clearthought.layout.TableLayoutConstants;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -17,7 +14,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.prefs.BackingStoreException;
-import java.util.prefs.Preferences;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -31,6 +27,9 @@ import org.processmining.framework.boot.Boot;
 import org.processmining.framework.util.OsUtil;
 
 import com.fluxicon.slickerbox.components.RoundedPanel;
+
+import info.clearthought.layout.TableLayout;
+import info.clearthought.layout.TableLayoutConstants;
 
 public class PMMemoryView extends RoundedPanel implements ActionListener {
 
@@ -244,42 +243,8 @@ public class PMMemoryView extends RoundedPanel implements ActionListener {
 		 * Refresh with new button panel.
 		 */
 		removeAll();
-		add(new JLabel("Manage memory setting"), "0, 0, 1, 0");
-		add(buttonPanel, "0, 1, 1, 1");
-
-		JPanel gaButtonPanel = new RoundedPanel(20, 5, 0);
-		gaButtonPanel.setBackground(new Color(80, 80, 80));
-		gaButtonPanel.setLayout(new BoxLayout(gaButtonPanel, BoxLayout.X_AXIS));
-
-		final ImageLozengeButton enableGAButton = new ImageLozengeButton(ImageLoader.load("action_30x30_black.png"), "Enable");
-		final ImageLozengeButton disableGAButton = new ImageLozengeButton(ImageLoader.load("remove_30x30_black.png"), "Disable");
-		if (Preferences.userNodeForPackage(Boot.class).get(Boot.TRACKING_BY_GA_ALLOWED, "false").equals("true")) {
-			enableGAButton.setEnabled(false);
-			disableGAButton.setEnabled(true);
-		} else {
-			enableGAButton.setEnabled(true);
-			disableGAButton.setEnabled(false);
-		}
-		enableGAButton.setToolTipText("Select this button to enable tracking with GA");
-		disableGAButton.setToolTipText("Select this button to disable tracking with GA");
-		enableGAButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Preferences.userNodeForPackage(Boot.class).put(Boot.TRACKING_BY_GA_ALLOWED, "true");
-				enableGAButton.setEnabled(false);
-				disableGAButton.setEnabled(true);
-			}			
-		});
-		disableGAButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Preferences.userNodeForPackage(Boot.class).put(Boot.TRACKING_BY_GA_ALLOWED, "false");
-				enableGAButton.setEnabled(true);
-				disableGAButton.setEnabled(false);
-			}			
-		});
-		gaButtonPanel.add(enableGAButton);
-		gaButtonPanel.add(disableGAButton);
-		add(new JLabel("Manage Google Analytics (GA) setting"), "2, 0");
-		add(gaButtonPanel, "2, 1");
+		add(new JLabel("Manage memory setting"), "0, 0, 2, 0");
+		add(buttonPanel, "0, 1, 2, 1");
 		
 		JPanel cacheButtonPanel = new RoundedPanel(20, 5, 0);
 		cacheButtonPanel.setBackground(new Color(80, 80, 80));
