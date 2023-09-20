@@ -1,7 +1,7 @@
 <ivy-module version="2.0">
     <info organisation="prom" module="ProM-Contexts" revision="latest">
     	<description>
-    		Version ${major_minor}.${env.BUILD_NUMBER}
+    		Version 6.13.4
     	</description>
     </info>
     <configurations>
