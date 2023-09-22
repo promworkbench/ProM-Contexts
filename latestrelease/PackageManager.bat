@@ -12,7 +12,7 @@
 
 @for /R .\lib %%I IN ("*.jar") DO @call :add .\lib\%%~nI.jar
 
-@jre11\bin\java -classpath "%X%" -Djava.library.path=.//lib -Xmx1G org.processmining.contexts.uitopia.packagemanager.PMFrame
+@java -classpath "%X%" -Djava.library.path=.//lib -Xmx1G org.processmining.contexts.uitopia.packagemanager.PMFrame
 
 set X=
 
