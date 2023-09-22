@@ -12,6 +12,6 @@
 
 @for /R .\lib %%I IN ("*.jar") DO @call :add .\lib\%%~nI.jar
 
-@jre11\bin\java -Xmx4G -XX:MaxPermSize=256m -Djava.system.class.loader=org.processmining.framework.util.ProMClassLoader -classpath "%X%" -XX:+UseCompressedOops -Djava.library.path=.//lib -Djava.util.Arrays.useLegacyMergeSort=true org.processmining.contexts.uitopia.UI
+@java -Xmx4G -XX:MaxPermSize=256m -Djava.system.class.loader=org.processmining.framework.util.ProMClassLoader -classpath "%X%" -XX:+UseCompressedOops -Djava.library.path=.//lib -Djava.util.Arrays.useLegacyMergeSort=true org.processmining.contexts.uitopia.UI
 
 set X=
