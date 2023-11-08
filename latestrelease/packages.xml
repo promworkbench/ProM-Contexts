@@ -1,6 +1,6 @@
 
 					<packages>
-						<package name="ProM-Contexts" version="6.14.13" os="all" url="ProM-Contexts/ProM-Contexts-6.14.13-all.zip" desc="ProM-Contexts" org="Eindhoven University of Technology" license="ProM" author="H.M.W. Verbeek" auto="false" hasPlugins="true" logo="prom_subtitle_hat_300.png">
+						<package name="ProM-Contexts" version="6.14.14" os="all" url="ProM-Contexts/ProM-Contexts-6.14.14-all.zip" desc="ProM-Contexts" org="Eindhoven University of Technology" license="ProM" author="H.M.W. Verbeek" auto="false" hasPlugins="true" logo="prom_subtitle_hat_300.png">
 				       <dependency org="prom" name="ProM-Framework" rev="latest" changing="true" transitive="true" />
 
 						</package>
